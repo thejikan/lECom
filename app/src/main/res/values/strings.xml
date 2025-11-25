@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">lECom</string>
+    <string name="welcome_message">Welcome to lECom</string>
+    <string name="app_subtitle">Your e-commerce solution</string>
+    <string name="card_title">Design System</string>
+    <string name="card_description">This app uses a structured design system. Update colors, fonts, and themes in the respective resource files.</string>
+    <string name="button_primary">Primary Button</string>
+    <string name="button_secondary">Secondary Button</string>
+    <string name="button_text">Text Button</string>
+    <string name="typography_examples">Typography Examples</string>
+</resources>
