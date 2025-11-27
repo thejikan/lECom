@@ -24,6 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.screen.activity.SummaryActivity"
+            android:exported="false"
+            android:label="@string/summary_page_title"
+            android:theme="@style/Theme.Lecom" />
         
     </application>
 

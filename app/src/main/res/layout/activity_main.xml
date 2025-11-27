@@ -7,175 +7,66 @@
     android:background="?attr/colorBackground"
     tools:context=".ui.screen.activity.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.Lecom.AppBarOverlay"
-        app:elevation="@dimen/app_bar_elevation">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Lecom.PopupOverlay"
-            app:title="@string/app_name"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            android:title="@string/app_name"
+            android:titleTextColor="?attr/colorOnPrimary"
+            app:popupTheme="@style/Theme.Lecom.PopupOverlay" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
 
         <LinearLayout
+            android:id="@+id/navigationButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_medium">
-
-            <!-- Welcome Section -->
-            <TextView
-                android:id="@+id/textWelcome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:text="@string/welcome_message"
-                android:textAppearance="@style/TextAppearance.Headline4"
-                android:textColor="?attr/colorOnBackground"
-                android:gravity="center" />
-
-            <TextView
-                android:id="@+id/textSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_large"
-                android:text="@string/app_subtitle"
-                android:textAppearance="@style/TextAppearance.Body1"
-                android:textColor="?attr/colorOnBackground"
-                android:gravity="center" />
-
-            <!-- Card Example -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardExample"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium"
-                style="@style/Widget.Lecom.Card"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:cardElevation="@dimen/elevation_small">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_medium">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/card_title"
-                        android:textAppearance="@style/TextAppearance.Headline6"
-                        android:textColor="?attr/colorOnSurface"
-                        android:layout_marginBottom="@dimen/margin_small" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/card_description"
-                        android:textAppearance="@style/TextAppearance.Body2"
-                        android:textColor="?attr/colorOnSurface" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Button Examples -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:text="@string/button_primary"
-                android:textAppearance="@style/TextAppearance.Button"
-                style="@style/Widget.Lecom.Button" />
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_medium"
+            android:gravity="center"
+            android:background="?attr/colorSurface">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonSecondary"
-                android:layout_width="match_parent"
+                android:id="@+id/buttonHome"
+                style="@style/Widget.Lecom.Button.Text"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:text="@string/button_secondary"
-                android:textAppearance="@style/TextAppearance.Button"
-                style="@style/Widget.Lecom.Button.Outlined" />
+                android:layout_weight="1"
+                android:text="@string/nav_button_home" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonText"
-                android:layout_width="match_parent"
+                android:id="@+id/buttonDetails"
+                style="@style/Widget.Lecom.Button.Text"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_large"
-                android:text="@string/button_text"
-                android:textAppearance="@style/TextAppearance.Button"
-                style="@style/Widget.Lecom.Button.Text" />
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_weight="1"
+                android:text="@string/nav_button_details" />
 
-            <!-- Typography Examples -->
-            <TextView
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSettings"
+                style="@style/Widget.Lecom.Button.Text"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:text="@string/typography_examples"
-                android:textAppearance="@style/TextAppearance.Headline6"
-                android:textColor="?attr/colorOnBackground" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_xs"
-                android:text="Headline 1"
-                android:textAppearance="@style/TextAppearance.Headline1"
-                android:textColor="?attr/colorOnBackground" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_xs"
-                android:text="Headline 6"
-                android:textAppearance="@style/TextAppearance.Headline6"
-                android:textColor="?attr/colorOnBackground" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_xs"
-                android:text="Body 1 - Regular text style"
-                android:textAppearance="@style/TextAppearance.Body1"
-                android:textColor="?attr/colorOnBackground" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:text="Caption - Small text"
-                android:textAppearance="@style/TextAppearance.Caption"
-                android:textColor="?attr/colorOnBackground" />
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_weight="1"
+                android:text="@string/nav_button_settings" />
 
         </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <!-- Floating Action Button Example -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/margin_large"
-        android:src="@android:drawable/ic_input_add"
-        app:tint="?attr/colorOnPrimary" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
+    android:padding="@dimen/padding_medium">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textSettingsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_title"
+            android:textAppearance="@style/TextAppearance.Headline5"
+            android:textColor="?attr/colorOnBackground" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:hint="@string/settings_hint_cart_value"
+            style="@style/Widget.Lecom.TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputCartValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:hint="@string/settings_hint_threshold"
+            style="@style/Widget.Lecom.TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputThreshold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonEvaluate"
+            style="@style/Widget.Lecom.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/settings_button_evaluate" />
+
+        <TextView
+            android:id="@+id/textDecision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/settings_decision_placeholder"
+            android:textAppearance="@style/TextAppearance.Subtitle1"
+            android:textColor="?attr/colorOnBackground" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBackHome"
+            style="@style/Widget.Lecom.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/settings_button_home" />
+
+    </LinearLayout>
+
+</ScrollView>
+

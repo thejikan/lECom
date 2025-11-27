@@ -8,4 +8,46 @@
     <string name="button_secondary">Secondary Button</string>
     <string name="button_text">Text Button</string>
     <string name="typography_examples">Typography Examples</string>
+
+    <!-- Navigation labels -->
+    <string name="nav_home_label">Home</string>
+    <string name="nav_details_label">Details</string>
+    <string name="nav_settings_label">Settings</string>
+    <string name="nav_button_home">Overview</string>
+    <string name="nav_button_details">Product Details</string>
+    <string name="nav_button_settings">Settings</string>
+
+    <!-- Home Fragment -->
+    <string name="home_title">Daily performance</string>
+    <string name="home_description">Run mock revenue logic and hop into the details screen.</string>
+    <string name="home_button_process">Process mocked orders</string>
+    <string name="home_button_go_details">Go to details</string>
+    <string name="home_button_open_page">Open summary page</string>
+    <string name="home_result_placeholder">Tap the button to calculate revenue.</string>
+    <string name="home_result_template">%1$d orders processed today for $%2$s revenue.</string>
+
+    <!-- Summary Activity -->
+    <string name="summary_page_title">Performance summary</string>
+    <string name="summary_page_body">This standalone page is launched outside the navigation host. Use it for full-screen presentations or detail flows.</string>
+    <string name="summary_page_button_close">Back to app</string>
+
+    <!-- Details Fragment -->
+    <string name="details_title">Product discount simulator</string>
+    <string name="details_hint_name">Product name</string>
+    <string name="details_hint_price">Full price</string>
+    <string name="details_hint_discount">Discount %</string>
+    <string name="details_button_generate">Generate summary</string>
+    <string name="details_summary_placeholder">Enter product info to see the pricing summary.</string>
+    <string name="details_summary_template">%1$s costs $%2$.2f. A %3$d%% discount brings it to $%4$s (you save $%5$s).</string>
+    <string name="details_button_settings">Adjust thresholds in settings</string>
+
+    <!-- Settings Fragment -->
+    <string name="settings_title">Logistics settings</string>
+    <string name="settings_hint_cart_value">Enter cart value</string>
+    <string name="settings_hint_threshold">Free shipping threshold</string>
+    <string name="settings_button_evaluate">Evaluate free shipping</string>
+    <string name="settings_decision_placeholder">Enter values to see if the cart qualifies for free shipping.</string>
+    <string name="settings_free_shipping_yes">Cart qualifies for free shipping: $%1$.2f</string>
+    <string name="settings_free_shipping_no">Add $%1$.2f more to unlock free shipping</string>
+    <string name="settings_button_home">Back to home</string>
 </resources>
