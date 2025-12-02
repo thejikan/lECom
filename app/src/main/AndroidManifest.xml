@@ -29,7 +29,7 @@
             android:name=".ui.screen.activity.SummaryActivity"
             android:exported="false"
             android:label="@string/summary_page_title"
-            android:theme="@style/Theme.Lecom" />
+        android:theme="@style/Theme.Lecom" />
         
     </application>
 

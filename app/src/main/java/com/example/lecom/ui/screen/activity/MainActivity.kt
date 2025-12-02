@@ -1,77 +1,150 @@
 package com.example.lecom.ui.screen.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import com.example.lecom.R
-import com.example.lecom.databinding.ActivityMainBinding
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.lecom.ui.screen.compose.DetailsScreen
+import com.example.lecom.ui.screen.compose.HomeScreen
+import com.example.lecom.ui.screen.compose.SettingsScreen
+import com.example.lecom.ui.theme.LeComTheme
 import com.example.lecom.utils.DesignSystem
 
 /**
  * Main Activity - Entry point of the application
  * This is the first page that loads when the app starts
  */
-class MainActivity : AppCompatActivity() {
-    
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+class MainActivity : ComponentActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
         // Apply edge-to-edge display
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        
         DesignSystem.initialize(this)
-
-        setupNavigation()
-        setupButtons()
-    }
-    
-    private fun setupNavigation() {
-        setSupportActionBar(binding.toolbar)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            updateButtonState(destination.id)
-            binding.toolbar.subtitle = when (destination.id) {
-                R.id.homeFragment -> getString(R.string.nav_home_label)
-                R.id.detailsFragment -> getString(R.string.nav_details_label)
-                R.id.settingsFragment -> getString(R.string.nav_settings_label)
-                else -> null
+        
+        setContent {
+            LeComTheme {
+                MainScreen()
             }
         }
-    }
-
-    private fun setupButtons() {
-        binding.buttonHome.setOnClickListener { navigateTo(R.id.homeFragment) }
-        binding.buttonDetails.setOnClickListener { navigateTo(R.id.detailsFragment) }
-        binding.buttonSettings.setOnClickListener { navigateTo(R.id.settingsFragment) }
-    }
-
-    private fun navigateTo(destinationId: Int) {
-        if (!::navController.isInitialized) return
-        if (navController.currentDestination?.id == destinationId) return
-        navController.navigate(destinationId)
-    }
-
-    private fun updateButtonState(destinationId: Int) {
-        binding.buttonHome.isEnabled = destinationId != R.id.homeFragment
-        binding.buttonDetails.isEnabled = destinationId != R.id.detailsFragment
-        binding.buttonSettings.isEnabled = destinationId != R.id.settingsFragment
     }
     
     override fun onResume() {
         super.onResume()
-        // Update design system if needed (e.g., theme changes)
         DesignSystem.updateTheme(this)
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination?.route ?: "home"
+    
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Column {
+                        Text(
+                            text = "lECom",
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = when (currentDestination) {
+                                "home" -> "Home"
+                                "details" -> "Details"
+                                "settings" -> "Settings"
+                                else -> ""
+                            },
+                            style = MaterialTheme.typography.bodySmall,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+            )
+        },
+        bottomBar = {
+            NavigationBar {
+                NavigationBarItem(
+                    icon = { Text("🏠") },
+                    label = { Text("Home") },
+                    selected = currentDestination == "home",
+                    onClick = {
+                        if (currentDestination != "home") {
+                            navController.navigate("home") {
+                                popUpTo("home") { inclusive = true }
+                            }
+                        }
+                    }
+                )
+                NavigationBarItem(
+                    icon = { Text("📋") },
+                    label = { Text("Details") },
+                    selected = currentDestination == "details",
+                    onClick = {
+                        if (currentDestination != "details") {
+                            navController.navigate("details")
+                        }
+                    }
+                )
+                NavigationBarItem(
+                    icon = { Text("⚙️") },
+                    label = { Text("Settings") },
+                    selected = currentDestination == "settings",
+                    onClick = {
+                        if (currentDestination != "settings") {
+                            navController.navigate("settings")
+                        }
+                    }
+                )
+            }
+        }
+    ) { paddingValues ->
+        NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier.padding(paddingValues)
+        ) {
+            composable("home") {
+                HomeScreen(
+                    onNavigateToDetails = {
+                        navController.navigate("details")
+                    }
+                )
+            }
+            composable("details") {
+                DetailsScreen(
+                    onNavigateToSettings = {
+                        navController.navigate("settings")
+                    }
+                )
+            }
+            composable("settings") {
+                SettingsScreen(
+                    onNavigateToHome = {
+                        navController.navigate("home") {
+                            popUpTo("home") { inclusive = true }
+                        }
+                    }
+                )
+            }
+        }
+    }
+}

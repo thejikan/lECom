@@ -1,23 +1,86 @@
 package com.example.lecom.ui.screen.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.lecom.databinding.ActivitySummaryBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.lecom.ui.theme.LeComTheme
 
 /**
  * Simple page that can be launched directly from any button click.
  * Demonstrates navigation outside of the Navigation Component graph.
  */
-class SummaryActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivitySummaryBinding
+class SummaryActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySummaryBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.buttonClose.setOnClickListener { finish() }
+        setContent {
+            LeComTheme {
+                SummaryScreen(
+                    onClose = { finish() }
+                )
+            }
+        }
     }
 }
 
+@Composable
+fun SummaryScreen(
+    onClose: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "Summary Page",
+            style = MaterialTheme.typography.headlineLarge,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = "This is a separate page opened via Intent",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = "Page Navigation Example",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "This page demonstrates how to open a new Activity from a button click, separate from the main navigation flow.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Button(
+            onClick = onClose,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Close")
+        }
+    }
+}
