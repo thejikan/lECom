@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.lecom.ui.component.AdvancedProductCard
 import com.example.lecom.ui.screen.activity.SummaryActivity
 import kotlin.random.Random
 
@@ -39,6 +40,11 @@ fun HomeScreen(
         Text(
             text = "Welcome to lECom Dashboard",
             style = MaterialTheme.typography.bodyLarge
+        )
+        AdvancedProductCard(
+            imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+            title = "Watch",
+            price = "₹2,999"
         )
 
         Button(
