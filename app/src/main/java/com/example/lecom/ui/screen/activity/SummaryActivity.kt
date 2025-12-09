@@ -8,8 +8,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.lecom.ui.component.DynamicGradientBuilder
 import com.example.lecom.ui.theme.LeComTheme
 
 /**
@@ -43,8 +45,8 @@ fun SummaryScreen(
     ) {
         Text(
             text = "Summary Page",
-            style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.Bold
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
         )
 
         Text(
@@ -71,6 +73,53 @@ fun SummaryScreen(
                     text = "This page demonstrates how to open a new Activity from a button click, separate from the main navigation flow.",
                     style = MaterialTheme.typography.bodyMedium
                 )
+            }
+        }
+        DynamicGradientBuilder.BuildOneCStyle(
+            gradientContextChild = {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        text = "Dynamic Gradient Header",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = Color.White
+                    )
+                    Text(
+                        text = "Scroll to see the gradient change",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White.copy(alpha = 0.8f)
+                    )
+                }
+            },
+            shortInfoChild = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text("Short Info Section")
+                }
+            }
+        ) {
+            // Main scrollable content
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                repeat(20) { index ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp)
+                    ) {
+                        Text(
+                            text = "Item $index",
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                }
             }
         }
 
