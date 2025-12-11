@@ -7,6 +7,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.lecom.ui.component.GlassContainer
+import androidx.compose.ui.graphics.Color
 
 /**
  * Details screen composable
@@ -93,6 +95,29 @@ fun DetailsScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Go to Settings")
+        }
+
+        GlassContainer(
+            modifier = Modifier.padding(16.dp),
+            width = 300.dp,
+            height = 200.dp,
+            borderRadius = 24.dp,
+            blur = 12.dp,
+            opacity = 0.25f
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp)
+            ) {
+                // Your content here
+                Text(
+                    text = summaryText,
+                    modifier = Modifier.padding(16.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                            color = Color.Red
+                )
+            }
         }
     }
 }
